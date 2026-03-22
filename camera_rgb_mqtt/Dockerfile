@@ -1,11 +1,11 @@
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-# System-Abhängigkeiten für OpenCV (headless reicht, kein Display nötig)
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ffmpeg \
-    libstdc++ \
-    libgomp \
+    libglib2.0-0 \
+    libgl1 \
+    && rm -rf /var/lib/apt/lists/* \
     && pip3 install --no-cache-dir \
         opencv-python-headless==4.9.0.80 \
         paho-mqtt==1.6.1 \
