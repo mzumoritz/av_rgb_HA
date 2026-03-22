@@ -1,5 +1,5 @@
-name: "Camera RGB → MQTT"
-version: "2.0.0"
+Sname: "Camera RGB → MQTT"
+version: "2.0.1"
 slug: "camera_rgb_mqtt"
 description: "Liest einen RTSP-Kamerastream mit 15 fps, berechnet den Durchschnitts-RGB-Wert und sendet ihn per MQTT an Home Assistant."
 url: "https://github.com/your-repo/camera-rgb-mqtt"
