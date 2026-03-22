@@ -1,11 +1,11 @@
-FROM python:3.11-alpine
+FROM python:3.11-slim
 
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y --no-install-recommends \
         ffmpeg \
-        libstdc++ \
-        libgomp \
-        bash \
+        libglib2.0-0 \
+        libgl1 \
         jq \
+    && rm -rf /var/lib/apt/lists/* \
     && pip3 install --no-cache-dir \
         opencv-python-headless==4.9.0.80 \
         paho-mqtt==1.6.1 \
