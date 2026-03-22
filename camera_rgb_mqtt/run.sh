@@ -1,18 +1,20 @@
-#!/usr/bin/with-contenv bashio
+#!/bin/bash
 
-bashio::log.info "Starte Camera RGB → MQTT (RTSP-Modus, 15 fps)..."
+echo "[INFO] Starte Camera RGB → MQTT..."
 
-export RTSP_URL=$(bashio::config 'rtsp_url')
-export TARGET_FPS=$(bashio::config 'target_fps')
-export MQTT_HOST=$(bashio::config 'mqtt_host')
-export MQTT_PORT=$(bashio::config 'mqtt_port')
-export MQTT_USERNAME=$(bashio::config 'mqtt_username')
-export MQTT_PASSWORD=$(bashio::config 'mqtt_password')
-export MQTT_TOPIC=$(bashio::config 'mqtt_topic')
+OPTIONS_FILE="/data/options.json"
 
-bashio::log.info "RTSP-URL:   ${RTSP_URL}"
-bashio::log.info "Ziel-FPS:   ${TARGET_FPS}"
-bashio::log.info "MQTT:       ${MQTT_HOST}:${MQTT_PORT}"
-bashio::log.info "Topic:      ${MQTT_TOPIC}"
+export RTSP_URL=$(jq -r '.rtsp_url' $OPTIONS_FILE)
+export TARGET_FPS=$(jq -r '.target_fps' $OPTIONS_FILE)
+export MQTT_HOST=$(jq -r '.mqtt_host' $OPTIONS_FILE)
+export MQTT_PORT=$(jq -r '.mqtt_port' $OPTIONS_FILE)
+export MQTT_USERNAME=$(jq -r '.mqtt_username' $OPTIONS_FILE)
+export MQTT_PASSWORD=$(jq -r '.mqtt_password' $OPTIONS_FILE)
+export MQTT_TOPIC=$(jq -r '.mqtt_topic' $OPTIONS_FILE)
+
+echo "[INFO] RTSP-URL:  $RTSP_URL"
+echo "[INFO] Ziel-FPS:  $TARGET_FPS"
+echo "[INFO] MQTT:      $MQTT_HOST:$MQTT_PORT"
+echo "[INFO] Topic:     $MQTT_TOPIC"
 
 python3 /camera_rgb.py

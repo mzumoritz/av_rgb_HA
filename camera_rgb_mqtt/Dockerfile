@@ -1,11 +1,11 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM python:3.11-alpine
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    ffmpeg \
-    libglib2.0-0 \
-    libgl1 \
-    && rm -rf /var/lib/apt/lists/* \
+RUN apk add --no-cache \
+        ffmpeg \
+        libstdc++ \
+        libgomp \
+        bash \
+        jq \
     && pip3 install --no-cache-dir \
         opencv-python-headless==4.9.0.80 \
         paho-mqtt==1.6.1 \
